@@ -1,0 +1,44 @@
+Ampache Mediaserver Interface
+
+The Ampache Mediaserver Interface is a bridge between an Ampache
+media server and a DBus MediaServer2Spec client.  It uses data
+provided by the Ampache XML API.
+
+Ampache Mediaserver Interface is meant to be used in conjuction
+with Rygel for which it will present itself as an external
+plugin.
+
+Rygel will in turn present the information from Ampache as UPnP
+A/V (DLNA) data.
+
+= Installation =
+
+see file INSTALLATION
+
+= Configuration =
+
+On first run, the program needs to be run with the following
+command line arguments to initialize the connection to the
+Ampache API:
+
+  -a, --ampache_uri_base     Specify base URI of Ampache instance.
+  -u, --username             Specify username to authenticate with Ampache instance.
+  -p, --password             Specify password to authenticate with Ampache instance.
+
+= Usage =
+
+On startup, the program checks for updates of the Ampache
+database.  If there was an update, the program reacquires all
+data.
+
+A reacquisition of all data can be forced with the following
+command line argument:
+
+  -f, --force-update         Force reread of Ampache data.
+
+A reacquisition of all data during runtime can be triggered by
+sending the SIGUSR1 signal to the programs process.
+
+= ToDos =
+
+see file TODO

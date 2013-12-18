@@ -1,0 +1,4 @@
+Installation Instructions
+
+$ autoreconf
+$ ./configure; make; install
