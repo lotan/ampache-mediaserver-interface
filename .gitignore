@@ -13,9 +13,8 @@ install-sh
 libtool
 ltmain.sh
 missing
-src/.deps/
+.deps
+.dirstamp
 src/*.c
-src/*.o
+*.o
 stamp-h1
-vapi/.deps/
-vapi/*.o
