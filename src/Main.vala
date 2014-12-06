@@ -108,23 +108,17 @@ private void add_songs (string user, string auth, long songs, long playlists, lo
                 mime);
         });
 
-    sp.xml_parsed.connect (
-        (object) => {
-            /* need condition after last downloaded chunk */
-
-            sa.store_mimetypes_tags_artists_albums ();
-        });
-
     var sd = new AmpacheAPI.ChunkDownloader ();
 
     sd.chunk_downloaded.connect (
         (object, data) => {
-            sp.parse_chunk (data);
+            sp.parse (data);
         });
 
     sd.download_completed.connect (
         (object) => {
-            sp.parse_end ();
+            /* insert accompanying tables into database */
+            sa.store_mimetypes_tags_artists_albums ();
 
             /* add playlists */
             add_playlists (user, auth, playlists, date);
@@ -141,9 +135,8 @@ private void add_songs (string user, string auth, long songs, long playlists, lo
         Memory.copy (buf, b, size);
         buf[size] = 0;
         debug ("chunk: %s", (string) buf);
-        sp.parse_chunk ((string) buf);
+        sp.parse ((string) buf);
     }
-    sp.parse_end ();
 #else
     sd.download (ampache_uri_base, "songs", auth, songs, DEFAULT_CHUNK_SIZE);
 #endif
@@ -187,13 +180,11 @@ private void add_playlists (string user, string auth, long playlists, long date)
 
     pd.chunk_downloaded.connect (
         (object, data) => {
-            pp.parse_chunk (data);
+            pp.parse (data);
         });
 
     pd.download_completed.connect (
         (object) => {
-            pp.parse_end ();
-
             /* iterate playlists */
             iterate_playlists (auth, pl, date);
         });
@@ -238,13 +229,11 @@ private void add_playlist (string auth, List<List<long>> playlists, long date) {
 
     sd.chunk_downloaded.connect (
         (object, data) => {
-            sp.parse_chunk (data);
+            sp.parse (data);
         });
 
     sd.download_completed.connect (
         (object) => {
-            sp.parse_end ();
-
             /* continue with next playlist */
             iterate_playlists (auth, playlists, date);
         });
@@ -303,8 +292,7 @@ private void update () {
             /* parse xml */
 
             var hp = new XMLParsing.HandshakeParser ();
-            hp.parse_chunk (data);
-            hp.parse_end ();
+            hp.parse (data);
             message ("auth: " + hp.auth);
             var tv = TimeVal ();
             tv.tv_sec = hp.update; tv.tv_usec = 0;
