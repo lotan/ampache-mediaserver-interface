@@ -139,24 +139,27 @@ public static string? get_suffix (string url) {
 
 private static Regex reg_artid = null;
 
-public static int? get_artid (string url) {
+public static int get_artid (string url) {
     MatchInfo mi;
-    string?   artid;
+    string?   artid = null;
 
     try {
         if (reg_artid == null)
-            reg_artid = new Regex ("\\bid=([0-9]+)");
+            reg_artid = new Regex ("\\bobject_id=([0-9]+)");
         reg_artid.match (url, 0, out mi);
     } catch (GLib.RegexError e) {
         error ("RegexError: %s", e.message);
     }
 
-    artid = mi.fetch (1);
+    if (mi.matches () == true) {
+        artid = mi.fetch (1);
+    }
 
     if (artid != null) {
         return int.parse (artid);
     } else {
-        return null;
+        // 0 should always be a safe assumption: the default image
+        return 0;
     }
 }
 
@@ -974,6 +977,7 @@ public class DB : Object {
                              long   rating,
                              long   art_id,
                              long   mimetype_id) throws SqlError {
+
         if (this.insert_song_statement.bind_int  (1,  (int) song_id)     != Sqlite.OK ||
             this.insert_song_statement.bind_text (2,  url)               != Sqlite.OK ||
             this.insert_song_statement.bind_int  (3,  (int) artist_id)   != Sqlite.OK ||

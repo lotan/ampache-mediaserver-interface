@@ -34,7 +34,7 @@ public class SongAdder : Object {
     private GLib.HashTable<long, string> tags;
     private GLib.HashTable<long, string> artists;
     private GLib.HashTable<long, string> albums;
-    private GLib.HashTable<string, long?> art;
+    private GLib.HashTable<string, long> art;
 
     private long mimetype_index = 1;
 
@@ -42,11 +42,11 @@ public class SongAdder : Object {
 
         this.db = db;
 
-        this.mimetypes = new GLib.HashTable<string, long?> (GLib.str_hash, GLib.str_equal);
+        this.mimetypes = new GLib.HashTable<string, long> (GLib.str_hash, GLib.str_equal);
         this.tags = new GLib.HashTable<long, string> (direct_hash, direct_equal);
         this.artists = new GLib.HashTable<long, string> (direct_hash, direct_equal);
         this.albums = new GLib.HashTable<long, string> (direct_hash, direct_equal);
-        this.art = new GLib.HashTable<string, long?> (GLib.str_hash, GLib.str_equal);
+        this.art = new GLib.HashTable<string, long> (GLib.str_hash, GLib.str_equal);
     }
 
     public void add_song (long   song_id,
@@ -85,10 +85,8 @@ public class SongAdder : Object {
             this.albums.set (album_id, album);
         }
 
-        long? art_id = Store.sqlite.get_artid (art);
-        if (art_id != null) {
-            this.art.set (art, art_id);
-        }
+        long art_id = Store.sqlite.get_artid (art);
+        this.art.set (art, art_id);
 
         db.insert_song (song_id,
                         url,
