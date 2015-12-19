@@ -170,6 +170,8 @@ public class DB : Object {
     public static const string IMAGE         = "image";
     public static const bool   SEARCHABILITY = false;
         
+    public static const string YEAR_DATEPREFIX = "-01-01T00:00:00Z";
+
     public File   database_file { get; construct; }
     public string auth          { get; set; default = ""; }
     public string art_path      { get; set; default = ""; }
@@ -1364,7 +1366,7 @@ public class DB : Object {
             hash_insert(song, filter, "Album",
                 this.select_get_all_songs_statement.column_text (4));
             hash_insert(song, filter, "Date",
-                this.select_get_all_songs_statement.column_text (9));
+                this.select_get_all_songs_statement.column_text (9) + YEAR_DATEPREFIX);
             hash_insert(song, filter, "Genre",
                 this.select_get_all_songs_statement.column_text (7));
             hash_insert(song, filter, "Duration",
@@ -1690,7 +1692,7 @@ public class DB : Object {
             variant_hash_insert(song, filter, "Album",
                 this.select_get_album_songs_statement.column_text (4));
             variant_hash_insert(song, filter, "Date",
-                this.select_get_album_songs_statement.column_text (9));
+                this.select_get_album_songs_statement.column_text (9) + YEAR_DATEPREFIX);
             variant_hash_insert(song, filter, "Genre",
                 this.select_get_album_songs_statement.column_text (7));
             variant_hash_insert(song, filter, "Duration",
@@ -1786,7 +1788,7 @@ public class DB : Object {
             variant_hash_insert(song, filter, "Album",
                 this.select_get_song_statement.column_text (4));
             variant_hash_insert(song, filter, "Date",
-                this.select_get_song_statement.column_text (9));
+                this.select_get_song_statement.column_text (9) + YEAR_DATEPREFIX);
             variant_hash_insert(song, filter, "Genre",
                 this.select_get_song_statement.column_text (7));
             variant_hash_insert(song, filter, "Duration",
@@ -1859,7 +1861,7 @@ public class DB : Object {
             variant_hash_insert(song, filter, "Album",
                 this.select_get_playlist_songs_statement.column_text (4));
             variant_hash_insert(song, filter, "Date",
-                this.select_get_playlist_songs_statement.column_text (9));
+                this.select_get_playlist_songs_statement.column_text (9) + YEAR_DATEPREFIX);
             variant_hash_insert(song, filter, "Genre",
                 this.select_get_playlist_songs_statement.column_text (7));
             variant_hash_insert(song, filter, "Duration",
