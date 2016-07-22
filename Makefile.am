@@ -39,9 +39,20 @@ ampache_mediaserver_interface_LDADD = \
 
 CLEANFILES = $(ampache_mediaserver_interface_SOURCES:.vala=.c)
 
-noinst_LIBRARIES = libampachemediaserverinterface-utils.a
+noinst_LIBRARIES = libampachemediaserverinterface-utils.a libmediaserverqueryparser.a
 libampachemediaserverinterface_utils_a_SOURCES = \
 	vapi/cutils.c
 
 libampachemediaserverinterface_utils_a_CPPFLAGS = \
 	$(GLIB_CFLAGS)
+
+AM_YFLAGS = --defines
+
+libmediaserverqueryparser_a_SOURCES = \
+	vapi/query-parser.y \
+	vapi/query-analyzer.l
+
+libmediaserverqueryparser_a_CPPFLAGS = \
+	$(GLIB_CFLAGS)
+
+CLEANFILES += vapi/query-parser.c vapi/query-parser.h vapi/query-analyzer.c
