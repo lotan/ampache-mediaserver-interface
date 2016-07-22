@@ -72,6 +72,11 @@ public interface MediaContainer2 : GLib.Object {
     public abstract GLib.HashTable<string, Variant?>[] ListItems (uint     offset,
                                                                   uint     max,
                                                                   string[] filter) throws DBusError;
+
+    public abstract GLib.HashTable<string, Variant?>[] SearchObjects (string   query,
+                                                                      uint     offset,
+                                                                      uint     max,
+                                                                      string[] filter) throws DBusError;
 }
 
 [DBus (name = "org.gnome.UPnP.MediaItem2")]
