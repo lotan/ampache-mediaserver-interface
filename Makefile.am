@@ -17,6 +17,7 @@ vala_pkgs = \
 	--pkg libxml-2.0 \
 	--pkg sqlite3 \
         --pkg cutils \
+        --pkg mediaserver-query-parser \
 	--pkg gio_ext-2.0
 
 ampache_mediaserver_interface_CPPFLAGS = \
@@ -35,7 +36,8 @@ ampache_mediaserver_interface_LDFLAGS = \
 
 ampache_mediaserver_interface_LDADD = \
 	$(GLIB_LIBS) $(LIBXML_LIBS) $(SQLITE_LIBS) \
-	libampachemediaserverinterface-utils.a
+	libampachemediaserverinterface-utils.a \
+	libmediaserverqueryparser.a
 
 CLEANFILES = $(ampache_mediaserver_interface_SOURCES:.vala=.c)
 
