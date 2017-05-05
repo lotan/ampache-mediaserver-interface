@@ -17,6 +17,24 @@ gio = dependency('gio-2.0')
 libxml = dependency('libxml-2.0', version: '>= 2.8.0')
 sqlite = dependency('sqlite3', version: '>= 3.0.0')
 
+# lexer
+lgen = generator(flex,
+                 output: '@PLAINNAME@.c',
+                 arguments: ['-o', '@OUTPUT@', '@INPUT@'])
+lfiles = lgen.process('vapi/query-analyzer.l')
+
+# parser
+pgen = generator(bison,
+                 output: ['@BASENAME@.c', '@BASENAME@.h'],
+                 arguments: ['@INPUT@', '--defines=@OUTPUT1@', '--output=@OUTPUT0@'])
+pfiles = pgen.process('vapi/query-parser.y')
+
+libmediaserverqueryparser = library(
+    'libmediaserverqueryparser',
+    lfiles,
+    pfiles,
+    include_directories: vapi)
+    
 libampachemediaserverinterface_utils = library(
     'libampachemediaserverinterface_utils',
     'vapi/cutils.c',
