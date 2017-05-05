@@ -18,3 +18,7 @@ missing
 src/*.c
 *.o
 stamp-h1
+vapi/query-analyzer.c
+vapi/query-parser.c
+vapi/query-parser.h
+ylwrap

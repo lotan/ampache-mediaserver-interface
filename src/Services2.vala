@@ -232,6 +232,12 @@ public class RootMediaContainer2 : GLib.Object, MediaContainer2, MediaObject2 {
 
         return {};
     }
+
+    public GLib.HashTable<string, Variant?>[] SearchObjects (
+        string query, uint offset, uint max, string[] filter) throws DBusError {
+
+        return {};
+    }
 }
 
 public class GenericMediaContainer2 : GLib.Object, MediaContainer2, MediaObject2 {
@@ -381,6 +387,12 @@ public class GenericMediaContainer2 : GLib.Object, MediaContainer2, MediaObject2
         } else {
             return {};
         }
+    }
+
+    public GLib.HashTable<string, Variant?>[] SearchObjects (
+        string query, uint offset, uint max, string[] filter) throws DBusError {
+
+        return {};
     }
 }
 
