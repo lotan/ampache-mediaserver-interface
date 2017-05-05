@@ -27,31 +27,31 @@ using Store.sqlite;
 
 namespace MediaServer2 {
 
-private static const string MEDIASERVER2_OBJECT_INTERFACE    = "org.gnome.UPnP.MediaObject2";
-private static const string MEDIASERVER2_ITEM_INTERFACE      = "org.gnome.UPnP.MediaItem2";
-private static const string MEDIASERVER2_CONTAINER_INTERFACE = "org.gnome.UPnP.MediaContainer2";
+private const string MEDIASERVER2_OBJECT_INTERFACE    = "org.gnome.UPnP.MediaObject2";
+private const string MEDIASERVER2_ITEM_INTERFACE      = "org.gnome.UPnP.MediaItem2";
+private const string MEDIASERVER2_CONTAINER_INTERFACE = "org.gnome.UPnP.MediaContainer2";
 
-private static const string SERVICE_NAME = "org.gnome.UPnP.MediaServer2.Ampache";
+private const string SERVICE_NAME = "org.gnome.UPnP.MediaServer2.Ampache";
 
-private static const string BASE_PATH = "/org/gnome/UPnP/MediaServer2";
+private const string BASE_PATH = "/org/gnome/UPnP/MediaServer2";
 
-private static const string ROOT      = "Ampache";
-private static const string GENRES    = "Genres";
-private static const string ARTISTS   = "Artists";
-private static const string ALBUMS    = "Albums";
-private static const string SONGS     = "Songs";
-private static const string PLAYLISTS = "Playlists";
-private static const string ART       = "Art";
+private const string ROOT      = "Ampache";
+private const string GENRES    = "Genres";
+private const string ARTISTS   = "Artists";
+private const string ALBUMS    = "Albums";
+private const string SONGS     = "Songs";
+private const string PLAYLISTS = "Playlists";
+private const string ART       = "Art";
 
-private static const string ROOT_PATH     = BASE_PATH + "/" + ROOT;
-private static const string GENRE_PATH    = BASE_PATH + "/" + GENRES;
-private static const string ARTIST_PATH   = BASE_PATH + "/" + ARTISTS;
-private static const string ALBUM_PATH    = BASE_PATH + "/" + ALBUMS;
-private static const string ALL_PATH      = BASE_PATH + "/" + SONGS;
-private static const string PLAYLIST_PATH = BASE_PATH + "/" + PLAYLISTS;
-private static const string ART_PATH      = BASE_PATH + "/" + ART;
+private const string ROOT_PATH     = BASE_PATH + "/" + ROOT;
+private const string GENRE_PATH    = BASE_PATH + "/" + GENRES;
+private const string ARTIST_PATH   = BASE_PATH + "/" + ARTISTS;
+private const string ALBUM_PATH    = BASE_PATH + "/" + ALBUMS;
+private const string ALL_PATH      = BASE_PATH + "/" + SONGS;
+private const string PLAYLIST_PATH = BASE_PATH + "/" + PLAYLISTS;
+private const string ART_PATH      = BASE_PATH + "/" + ART;
 
-private static const string MEDIASERVER2_XML = """
+private const string MEDIASERVER2_XML = """
     <node>
       <interface name='org.gnome.UPnP.MediaObject2'>
         <property name='Parent' type='o' access='read' />
