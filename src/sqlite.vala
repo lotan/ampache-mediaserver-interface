@@ -165,12 +165,12 @@ public static int get_artid (string url) {
 
 public class DB : Object {
 
-    public static const string CONTAINER     = "container";
-    public static const string MUSIC         = "music";
-    public static const string IMAGE         = "image";
-    public static const bool   SEARCHABILITY = false;
+    public const string CONTAINER     = "container";
+    public const string MUSIC         = "music";
+    public const string IMAGE         = "image";
+    public const bool   SEARCHABILITY = false;
         
-    public static const string YEAR_DATEPREFIX = "-01-01T00:00:00Z";
+    public const string YEAR_DATEPREFIX = "-01-01T00:00:00Z";
 
     public File   database_file { get; construct; }
     public string auth          { get; set; default = ""; }
@@ -181,31 +181,31 @@ public class DB : Object {
 
     private int new_version;
 
-    private static const string CREATE_MIMETYPES =
+    private const string CREATE_MIMETYPES =
     """CREATE TABLE mimetypes (
     id   INTEGER,
     type VARCHAR(255),
     PRIMARY KEY(id))""";
 
-    private static const string CREATE_TAGS =
+    private const string CREATE_TAGS =
     """CREATE TABLE tags (
     id   INTEGER,
     name VARCHAR(255),
     PRIMARY KEY(id))""";
 
-    private static const string CREATE_ARTISTS =
+    private const string CREATE_ARTISTS =
     """CREATE TABLE artists (
     id   INTEGER,
     name VARCHAR(255),
     PRIMARY KEY(id))""";
 
-    private static const string CREATE_ALBUMS =
+    private const string CREATE_ALBUMS =
     """CREATE TABLE albums (
     id   INTEGER,
     name VARCHAR(255),
     PRIMARY KEY(id))""";
 
-    private static const string CREATE_SONGS =
+    private const string CREATE_SONGS =
     """CREATE TABLE songs (
     id        INTEGER,
     url       VARCHAR(1023),
@@ -223,104 +223,104 @@ public class DB : Object {
     mime_id   INTEGER,
     PRIMARY KEY(id))""";
 
-    private static const string CREATE_PLAYLISTS =
+    private const string CREATE_PLAYLISTS =
     """CREATE TABLE playlists (
     id   INTEGER,
     name VARCHAR(255),
     PRIMARY KEY(id))""";
 
-    private static const string CREATE_PLAYLISTSONGS =
+    private const string CREATE_PLAYLISTSONGS =
     """CREATE TABLE playlistsongs (
     id          INTEGER,
     playlist_id INTEGER,
     track       INTEGER,
     PRIMARY KEY(id,playlist_id))""";
 
-    private static const string CREATE_ART =
+    private const string CREATE_ART =
     """CREATE TABLE art (
     id  INTEGER,
     url VARCHAR(255),
     PRIMARY KEY(id))""";
 
-    private static const string CREATE_DATES =
+    private const string CREATE_DATES =
     """CREATE TABLE dates (
     type INTEGER,
     date INTEGER,
     PRIMARY KEY(type))""";
 
-    private static const string CREATE_CONFIGURATION =
+    private const string CREATE_CONFIGURATION =
     """CREATE TABLE configuration (
     key   VARCHAR(255),
     value VARCHAR(255),
     PRIMARY KEY(key))""";
 
-    private static const string INSERT_MIMETYPE =
+    private const string INSERT_MIMETYPE =
     "INSERT INTO mimetypes VALUES (?, ?)";
 
-    private static const string INSERT_TAG =
+    private const string INSERT_TAG =
     "INSERT INTO tags VALUES (?, ?)";
 
-    private static const string INSERT_ARTIST =
+    private const string INSERT_ARTIST =
     "INSERT INTO artists VALUES (?, ?)";
 
-    private static const string INSERT_ALBUM =
+    private const string INSERT_ALBUM =
     "INSERT INTO albums VALUES (?, ?)";
 
-    private static const string INSERT_SONG =
+    private const string INSERT_SONG =
     "INSERT INTO songs VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    private static const string INSERT_PLAYLIST =
+    private const string INSERT_PLAYLIST =
     "INSERT INTO playlists VALUES (?, ?)";
 
-    private static const string INSERT_PLAYLISTSONG =
+    private const string INSERT_PLAYLISTSONG =
     "INSERT INTO playlistsongs VALUES (?, ?, ?)";
 
-    private static const string INSERT_ART =
+    private const string INSERT_ART =
     "INSERT INTO art VALUES (?, ?)";
 
-    private static const string INSERT_DATE =
+    private const string INSERT_DATE =
     "INSERT INTO dates VALUES (?, ?)";
 
-    private static const string SELECT_DATE =
+    private const string SELECT_DATE =
     "SELECT date FROM dates WHERE type = ?";
 
-    private static const string REPLACE_CONFIGURATION =
+    private const string REPLACE_CONFIGURATION =
     "REPLACE INTO configuration VALUES (?, ?)";
 
-    private static const string SELECT_CONFIGURATION =
+    private const string SELECT_CONFIGURATION =
     "SELECT value FROM configuration WHERE key = ?";
 
-    private static const string DELETE_MIMETYPES =
+    private const string DELETE_MIMETYPES =
     "DELETE FROM mimetypes";
 
-    private static const string DELETE_TAGS =
+    private const string DELETE_TAGS =
     "DELETE FROM tags";
 
-    private static const string DELETE_ARTISTS =
+    private const string DELETE_ARTISTS =
     "DELETE FROM artists";
 
-    private static const string DELETE_ALBUMS =
+    private const string DELETE_ALBUMS =
     "DELETE FROM albums";
 
-    private static const string DELETE_SONGS =
+    private const string DELETE_SONGS =
     "DELETE FROM songs";
 
-    private static const string DELETE_PLAYLISTS =
+    private const string DELETE_PLAYLISTS =
     "DELETE FROM playlists";
 
-    private static const string DELETE_PLAYLISTSONGS =
+    private const string DELETE_PLAYLISTSONGS =
     "DELETE FROM playlistsongs";
 
-    private static const string DELETE_ART =
+    private const string DELETE_ART =
     "DELETE FROM art";
 
-    private static const string DELETE_DATES =
+    private const string DELETE_DATES =
     "DELETE FROM dates";
 
-    private static const string DELETE_CONFIGURATION =
+    private const string DELETE_CONFIGURATION =
     "DELETE FROM configuration";
 
-    private static const string SELECT_GET_ALL_GENRES =
+    private const string SELECT_GET_ALL_GENRES =
     """SELECT
         s.tag_id, t.name, s.artists
     FROM
@@ -333,10 +333,10 @@ public class DB : Object {
         t.name
     LIMIT ? OFFSET ?""";
 
-    private static const string SELECT_COUNT_ALL_GENRES =
+    private const string SELECT_COUNT_ALL_GENRES =
     """SELECT COUNT(*) FROM (SELECT tag_id FROM songs GROUP BY tag_id)""";
 
-    private static const string SELECT_GET_ALL_ARTISTS =
+    private const string SELECT_GET_ALL_ARTISTS =
     """SELECT
         s.artist_id, a.name, s.albums
     FROM
@@ -349,10 +349,10 @@ public class DB : Object {
         a.name
     LIMIT ? OFFSET ?""";
 
-    private static const string SELECT_COUNT_ALL_ARTISTS =
+    private const string SELECT_COUNT_ALL_ARTISTS =
     """SELECT COUNT(*) FROM (SELECT artist_id FROM songs GROUP BY artist_id)""";
 
-    private static const string SELECT_GET_ALL_ALBUMS =
+    private const string SELECT_GET_ALL_ALBUMS =
     """SELECT
         s.artist_id, s.album_id, a.name, l.name, s.songs
     FROM
@@ -369,10 +369,10 @@ public class DB : Object {
         l.name
     LIMIT ? OFFSET ?""";
 
-    private static const string SELECT_COUNT_ALL_ALBUMS =
+    private const string SELECT_COUNT_ALL_ALBUMS =
     """SELECT COUNT(*) FROM (SELECT album_id FROM songs GROUP BY artist_id, album_id)""";
 
-    private static const string SELECT_GET_ALL_SONGS =
+    private const string SELECT_GET_ALL_SONGS =
     """SELECT
         s.artist_id, s.album_id, s.id, a.name, l.name, s.title, s.url,
         t.name, s.track, s.year, s.bitrate, s.time, s.size, r.url, m.type 
@@ -402,10 +402,10 @@ public class DB : Object {
         s.title
     LIMIT ? OFFSET ?""";
 
-    private static const string SELECT_COUNT_ALL_SONGS =
+    private const string SELECT_COUNT_ALL_SONGS =
     """SELECT COUNT(*) FROM songs""";
 
-    private static const string SELECT_GET_ALL_PLAYLISTS =
+    private const string SELECT_GET_ALL_PLAYLISTS =
     """SELECT
         p.id, p.name, ps.songs
     FROM
@@ -416,10 +416,10 @@ public class DB : Object {
         ps.playlist_id = p.id
     LIMIT ? OFFSET ?""";
 
-    private static const string SELECT_COUNT_ALL_PLAYLISTS =
+    private const string SELECT_COUNT_ALL_PLAYLISTS =
     """SELECT COUNT(*) FROM playlists""";
 
-    private static const string SELECT_GET_GENRE_ARTISTS =
+    private const string SELECT_GET_GENRE_ARTISTS =
     """SELECT
         s.artist_id, a.name, s.albums
     FROM
@@ -432,13 +432,13 @@ public class DB : Object {
         a.name
     LIMIT ? OFFSET ?""";
 
-    private static const string SELECT_COUNT_GENRE_ARTISTS =
+    private const string SELECT_COUNT_GENRE_ARTISTS =
     """SELECT COUNT(*) FROM (SELECT artist_id FROM songs WHERE tag_id = ? GROUP BY artist_id)""";
 
-    private static const string SELECT_IDENTIFY_GENRE =
+    private const string SELECT_IDENTIFY_GENRE =
     """SELECT name FROM tags WHERE id = ?""";
 
-    private static const string SELECT_GET_ARTIST_ALBUMS =
+    private const string SELECT_GET_ARTIST_ALBUMS =
     """SELECT
         s.artist_id, s.album_id, a.name, l.name, s.songs
     FROM
@@ -455,13 +455,13 @@ public class DB : Object {
         l.name
     LIMIT ? OFFSET ?""";
 
-    private static const string SELECT_COUNT_ARTIST_ALBUMS =
+    private const string SELECT_COUNT_ARTIST_ALBUMS =
     """SELECT COUNT(*) FROM (SELECT album_id FROM songs WHERE artist_id = ? GROUP BY album_id)""";
 
-    private static const string SELECT_IDENTIFY_ARTIST =
+    private const string SELECT_IDENTIFY_ARTIST =
     """SELECT name FROM artists WHERE id = ?""";
 
-    private static const string SELECT_GET_ALBUM_SONGS =
+    private const string SELECT_GET_ALBUM_SONGS =
     """SELECT
         s.artist_id, s.album_id, s.id, a.name, l.name, s.title, s.url,
         t.name, s.track, s.year, s.bitrate, s.time, s.size, r.url, m.type 
@@ -491,13 +491,13 @@ public class DB : Object {
         s.track, s.title
     LIMIT ? OFFSET ?""";
 
-    private static const string SELECT_COUNT_ALBUM_SONGS =
+    private const string SELECT_COUNT_ALBUM_SONGS =
     """SELECT COUNT(*) FROM (SELECT * FROM songs WHERE artist_id = ? AND album_id = ?)""";
 
-    private static const string SELECT_IDENTIFY_ALBUM =
+    private const string SELECT_IDENTIFY_ALBUM =
     """SELECT name FROM albums WHERE id = ?""";
 
-    private static const string SELECT_GET_SONG =
+    private const string SELECT_GET_SONG =
     """SELECT
         s.artist_id, s.album_id, s.id, a.name, l.name, s.title, s.url,
         t.name, s.track, s.year, s.bitrate, s.time, s.size, r.url, m.type 
@@ -524,7 +524,7 @@ public class DB : Object {
     ON
         s.mime_id = m.id""";
 
-    private static const string SELECT_GET_PLAYLIST_SONGS =
+    private const string SELECT_GET_PLAYLIST_SONGS =
     """SELECT
         s.artist_id, s.album_id, s.id, a.name, l.name, s.title, s.url,
         t.name, s.track, s.year, s.bitrate, s.time, s.size, r.url, m.type 
@@ -558,13 +558,13 @@ public class DB : Object {
         p.track
     LIMIT ? OFFSET ?""";
 
-    private static const string SELECT_COUNT_PLAYLIST_SONGS =
+    private const string SELECT_COUNT_PLAYLIST_SONGS =
     """SELECT COUNT(*) FROM (SELECT id FROM playlistsongs WHERE playlist_id = ?)""";
 
-    private static const string SELECT_IDENTIFY_PLAYLIST =
+    private const string SELECT_IDENTIFY_PLAYLIST =
     """SELECT name FROM playlists WHERE id = ?""";
 
-    private static const string SELECT_GET_ART =
+    private const string SELECT_GET_ART =
     """SELECT id, url FROM art WHERE id = ?""";
 
     private Statement insert_mimetype_statement;
